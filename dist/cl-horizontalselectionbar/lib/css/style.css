@@ -1,0 +1,425 @@
+/* ==========================================================================
+   Climber Selection Bar - Styles
+   v1.7.0 - Updated for compatibility with Qlik Sense June 2020+
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   FIX: Qlik Sense June 2020+ introduces a blocking <div> overlay
+   (.qv-object-nav / .qlik-object-nav) that intercepts click events on
+   extension content. Setting pointer-events: none allows clicks to pass
+   through to the selection bar underneath.
+   -------------------------------------------------------------------------- */
+.qv-object-cl-horizontalselectionbar .qv-object-nav,
+.qv-object-cl-horizontalselectionbar .qlik-object-nav,
+.qv-object-cl-horizontalselectionbar .qs-object-nav {
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   FIX: In newer Qlik Sense versions (2022+), the object wrapper may also
+   add an overlay div with class 'sel-toolbar-confirm' during selection mode.
+   We need to ensure it doesn't block the entire extension area.
+   -------------------------------------------------------------------------- */
+.qv-object-cl-horizontalselectionbar .sel-toolbar-confirm {
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   Container
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cl-selectionbar-container.align-left {
+  justify-content: flex-start;
+}
+
+.cl-selectionbar-container.align-right {
+  justify-content: flex-end;
+}
+
+.cl-selectionbar-container.align-center {
+  justify-content: center;
+}
+
+.cl-selectionbar-container.align-centerSpread {
+  justify-content: space-between;
+}
+
+.cl-selectionbar-container.align-stack {
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* --------------------------------------------------------------------------
+   List item wrapper
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-list {
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+  box-sizing: border-box;
+  padding: 2px 4px;
+}
+
+.cl-selectionbar-list.label-left {
+  flex-direction: row;
+  align-items: center;
+}
+
+.cl-selectionbar-list.label-left .cl-selectionbar-label {
+  margin-right: 6px;
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Labels
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-label {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: inherit;
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   Items row (the clickable value items)
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-items {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cl-selectionbar-items::-webkit-scrollbar {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Individual value item
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  margin: 0 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.cl-selectionbar-item:hover {
+  opacity: 0.85;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cl-selectionbar-item.state-selected {
+  font-weight: 600;
+}
+
+.cl-selectionbar-item.state-alternative {
+  opacity: 0.5;
+}
+
+.cl-selectionbar-item.state-excluded {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.cl-selectionbar-item.state-optional {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Flag items
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: opacity 0.15s ease;
+}
+
+.cl-selectionbar-flag:hover {
+  opacity: 0.85;
+}
+
+.cl-selectionbar-flag.state-selected {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.cl-selectionbar-flag.state-alternative,
+.cl-selectionbar-flag.state-excluded {
+  opacity: 0.3;
+}
+
+.cl-selectionbar-flag img {
+  height: 20px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* --------------------------------------------------------------------------
+   Variable items
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-variable-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  margin: 0 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.cl-selectionbar-variable-item:hover {
+  opacity: 0.85;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cl-selectionbar-variable-item.active {
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Button / Link
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid currentColor;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.cl-selectionbar-button:hover {
+  opacity: 0.75;
+}
+
+/* --------------------------------------------------------------------------
+   Date Range Picker
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-daterange {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.cl-selectionbar-daterange-trigger {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+.cl-selectionbar-daterange-trigger:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cl-selectionbar-daterange-trigger .icon-calendar {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.cl-selectionbar-daterange-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  display: none;
+  min-width: 280px;
+}
+
+.cl-selectionbar-daterange-dropdown.open {
+  display: block;
+}
+
+.cl-selectionbar-daterange-dropdown .date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.cl-selectionbar-daterange-dropdown .date-nav {
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.cl-selectionbar-daterange-dropdown .date-nav:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  text-align: center;
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-header {
+  font-weight: 600;
+  font-size: 10px;
+  padding: 4px 0;
+  opacity: 0.6;
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-cell {
+  padding: 4px 0;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-cell:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-cell.selected {
+  font-weight: 600;
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-cell.in-range {
+  opacity: 0.8;
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-cell.other-month {
+  opacity: 0.3;
+}
+
+.cl-selectionbar-daterange-dropdown .date-grid .day-cell.today {
+  text-decoration: underline;
+}
+
+.cl-selectionbar-daterange-dropdown .presets {
+  border-top: 1px solid #eee;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.cl-selectionbar-daterange-dropdown .presets .preset-btn {
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 2px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cl-selectionbar-daterange-dropdown .presets .preset-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   Export button
+   -------------------------------------------------------------------------- */
+.cl-selectionbar-export-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.cl-selectionbar-export-btn:hover {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive / Mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .cl-selectionbar-container {
+    flex-wrap: wrap;
+  }
+
+  .cl-selectionbar-list {
+    flex-shrink: 1;
+  }
+
+  .cl-selectionbar-daterange-dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 8px 8px 0 0;
+    min-width: unset;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print / Snapshot support
+   -------------------------------------------------------------------------- */
+@media print {
+  .cl-selectionbar-container {
+    overflow: visible;
+  }
+  .cl-selectionbar-daterange-dropdown {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   FIX: Additional compatibility for Qlik Sense November 2024+
+   The object header area can overlap with the extension content.
+   -------------------------------------------------------------------------- */
+.qv-object-cl-horizontalselectionbar .qv-inner-object {
+  overflow: visible;
+}
