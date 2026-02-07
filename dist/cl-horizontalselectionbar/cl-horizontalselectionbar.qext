@@ -1,0 +1,16 @@
+{
+  "name": "Climber Selection Bar",
+  "description": "Horizontal selection bar with initial selection capabilities. Selections through both click and swipes. Handles setting variables and showing flags.",
+  "icon": "filterpane",
+  "type": "visualization",
+  "version": "1.7.0",
+  "preview": "preview.png",
+  "author": "Climber AB / Community maintained",
+  "homepage": "https://github.com/ClimberAB/ClimberSelectionBar",
+  "license": "MIT",
+  "repository": "https://github.com/ClimberAB/ClimberSelectionBar",
+  "keywords": "qlik-sense, visualization, selection, filter, horizontal, bar",
+  "dependencies": {
+    "qlik-sense": ">=3.0.x"
+  }
+}

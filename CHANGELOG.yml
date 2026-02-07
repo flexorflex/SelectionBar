@@ -124,10 +124,25 @@ v1.4:
 
   v1.6.1:
   date: "2019-03-19"
-  new: 
-  enhancements: 
+  new:
+  enhancements:
     Support for February 2019
   fixes:
     stateUtil does not always trigger isInAnalysisMode()
 
-
+  v1.7.0:
+  date: "2026-02-07"
+  new:
+    - Rebuilt extension source for modern Qlik Sense compatibility
+    - Source code now included in repository (dist/ folder)
+  enhancements:
+    - Compatibility with Qlik Sense June 2020 through November 2024+
+  fixes:
+    - Fixed blocking div overlay (qv-object-nav) that prevented click interactions after Qlik Sense June 2020
+    - Replaced unreliable stateUtil.isInAnalysisMode() with robust mode detection using qlik.navigation API
+    - Removed dependencies on non-exposed internal RequireJS modules
+    - Uses only stable Extension API and Capability API methods
+    - Improved snapshot and export support declarations
+    - Added pointer-events CSS fix for qv-object-nav, qlik-object-nav, qs-object-nav overlays
+    - Improved mobile/touch swipe handling
+    - Fixed date range picker z-index and positioning issues
